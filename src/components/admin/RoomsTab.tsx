@@ -20,7 +20,7 @@ const RoomsTab = () => {
 
   const fetchRooms = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/rooms/availability?date=${date}`);
+      const res = await axios.get(`https://zanu-sunidhi-coliving-4.onrender.com/api/rooms/availability?date=${date}`);
       setRooms(res.data.data);
     } catch (err) {
       console.error("Failed to fetch rooms", err);
@@ -34,7 +34,7 @@ const RoomsTab = () => {
   const handleAddRoom = async () => {
     if (!newRoomNumber) return alert("Enter room number");
     try {
-      await axios.post("http://localhost:5000/api/rooms/add", {
+      await axios.post("https://zanu-sunidhi-coliving-4.onrender.com/api/rooms/add", {
         type: newRoomType,
         roomNumber: newRoomNumber,
       });
@@ -51,7 +51,7 @@ const RoomsTab = () => {
   const handleDeleteRoom = async (id: string) => {
     if (!confirm("Are you sure you want to delete this room?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/rooms/delete/${id}`);
+      await axios.delete(`https://zanu-sunidhi-coliving-4.onrender.com/api/rooms/delete/${id}`);
       fetchRooms();
     } catch (err) {
       console.error(err);

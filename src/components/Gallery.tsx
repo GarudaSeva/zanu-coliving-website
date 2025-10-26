@@ -17,7 +17,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/gallery");
+        const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
         setImages(res.data.data);
       } catch (err) {
         console.error("Error fetching gallery images:", err);
@@ -68,7 +68,7 @@ const Gallery = () => {
               className="group relative aspect-video rounded-xl overflow-hidden bg-muted hover:shadow-xl transition-all duration-300"
             >
               <img
-                src={`http://localhost:5000${image.imageUrl}`}
+                src={`https://zanu-sunidhi-coliving-4.onrender.com${image.imageUrl}`}
                 alt={image.alt}
                 className="w-full h-full object-cover"
               />

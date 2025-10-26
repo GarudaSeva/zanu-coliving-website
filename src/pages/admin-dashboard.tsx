@@ -1,9 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 import RoomsTab from "@/components/admin/RoomsTab";
+import ContactTab from "@/components/admin/ContactTab";
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState<"Gallery" | "Facilities" | "Rooms">("Gallery");
+const [activeTab, setActiveTab] = useState<"Gallery" | "Facilities" | "Rooms" | "Contact">("Gallery");
 
   // Gallery state
   const [file, setFile] = useState<File | null>(null);
@@ -32,7 +33,7 @@ const AdminDashboard = () => {
     formData.append("alt", alt);
 
     try {
-      await axios.post("http://localhost:5000/api/gallery/upload", formData, {
+      await axios.post("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("✅ Uploaded successfully!");
@@ -57,7 +58,7 @@ const AdminDashboard = () => {
 
       {/* Tabs */}
       <div className="flex justify-center gap-4 mb-8">
-        {["Gallery", "Rooms"].map((tab) => (
+        {["Gallery", "Rooms" , "Contact"].map((tab) => (
           <button
             key={tab}
             className={`px-6 py-2 rounded-lg font-medium transition-transform duration-200
@@ -107,9 +108,9 @@ const AdminDashboard = () => {
           </form>
         )}
 
-        {/* Rooms Section */}
         
 {activeTab === "Rooms" && <RoomsTab />}
+{activeTab === "Contact" && <ContactTab />}
       </div>
     </div>
   );

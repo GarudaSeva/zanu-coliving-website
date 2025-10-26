@@ -18,7 +18,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/contact", formData);
+      await axios.post("https://zanu-sunidhi-coliving-4.onrender.com/api/contact", formData);
       toast.success("Thank you! We'll contact you soon.");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error) {

@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -15,7 +17,9 @@ const ContactTab = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/contact");
+        const res = await axios.get(
+          "https://zanu-sunidhi-coliving-4.onrender.com/api/contact"
+        );
         setContacts(res.data);
       } catch (err) {
         console.error(err);
@@ -26,24 +30,31 @@ const ContactTab = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto border p-4 rounded shadow">
-      <h2 className="text-xl font-semibold mb-4">Contact Details</h2>
-      <table className="min-w-full border-collapse border border-gray-300">
+    <div className="overflow-x-auto border p-4 rounded-2xl shadow-xl bg-white/80 backdrop-blur-sm">
+      <h2 className="text-2xl font-bold mb-6 text-center">Contact Details</h2>
+      <table className="min-w-full border-collapse rounded-xl overflow-hidden">
         <thead>
-          <tr className="bg-gray-200">
-            <th className="border px-4 py-2">Name</th>
-            <th className="border px-4 py-2">Email</th>
-            <th className="border px-4 py-2">Phone</th>
-            <th className="border px-4 py-2">Message</th>
+          <tr className="bg-gradient-to-r from-blue-200 to-blue-300 text-gray-800">
+            <th className="px-6 py-3 text-left font-semibold">Name</th>
+            <th className="px-6 py-3 text-left font-semibold">Email</th>
+            <th className="px-6 py-3 text-left font-semibold">Phone</th>
+            <th className="px-6 py-3 text-left font-semibold">Message</th>
           </tr>
         </thead>
         <tbody>
-          {contacts.map((c) => (
-            <tr key={c._id} className="text-center">
-              <td className="border px-4 py-2">{c.name}</td>
-              <td className="border px-4 py-2">{c.email}</td>
-              <td className="border px-4 py-2">{c.phone || "-"}</td>
-              <td className="border px-4 py-2">{c.message || "-"}</td>
+          {contacts.map((c, idx) => (
+            <tr
+              key={c._id}
+              className={`${
+                idx % 2 === 0
+                  ? "bg-white/70 hover:bg-white/90"
+                  : "bg-gray-100/70 hover:bg-gray-200/90"
+              } transition-colors`}
+            >
+              <td className="px-6 py-3 border-b">{c.name}</td>
+              <td className="px-6 py-3 border-b">{c.email}</td>
+              <td className="px-6 py-3 border-b">{c.phone || "-"}</td>
+              <td className="px-6 py-3 border-b">{c.message || "-"}</td>
             </tr>
           ))}
         </tbody>

@@ -14,6 +14,7 @@ interface GalleryItem {
 
 const GalleryTab = () => {
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState("");
   const [category, setCategory] = useState("Bedroom");
@@ -23,14 +24,21 @@ const GalleryTab = () => {
   const categories = ["Bedroom", "Dining", "Common Area"];
 
   const fetchGallery = async () => {
-    try {
-      const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
-      setGallery(res.data.data);
-    } catch (err) {
-      console.error(err);
-      alert("Failed to fetch gallery items");
-    }
-  };
+  try {
+    const res = await axios.get(
+      "https://zanu-sunidhi-coliving-4.onrender.com/api/gallery"
+    );
+    setGallery(Array.isArray(res.data) ? res.data : []);
+  } catch (err) {
+    console.error(err);
+    setGallery([]);
+    alert("Failed to fetch gallery items");
+  } finally {
+    setLoading(false); // stop loading regardless of success/failure
+  }
+};
+
+
 
   useEffect(() => {
     fetchGallery();
@@ -67,7 +75,7 @@ const GalleryTab = () => {
       setAlt("");
       setShowModal(false);
     } catch (err) {
-      console.error(err);
+      console.error("Upload error:", err);
       alert("❌ Upload failed");
     }
   };
@@ -77,10 +85,18 @@ const GalleryTab = () => {
       await axios.delete(`https://zanu-sunidhi-coliving-4.onrender.com/api/gallery/${id}`);
       setGallery(gallery.filter((item) => item._id !== id));
     } catch (err) {
-      console.error(err);
+      console.error("Delete error:", err);
       alert("Failed to delete image");
     }
   };
+
+  if (loading) {
+    return <p className="text-center py-20">Loading gallery...</p>;
+  }
+
+  if (!gallery.length) {
+    return <p className="text-center py-20">No images found in the gallery.</p>;
+  }
 
   return (
     <div className="space-y-6">
@@ -145,25 +161,28 @@ const GalleryTab = () => {
 
       {/* Gallery Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {gallery.map((item) => (
-          <div key={item._id} className="border rounded-xl shadow-md overflow-hidden relative">
-            <img
-              src={`https://zanu-sunidhi-coliving-4.onrender.com${item.imageUrl}`}
-              alt={item.alt || item.category}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="font-semibold text-lg">{item.category}</h3>
-              <p className="text-sm text-gray-600">{item.alt || "No description"}</p>
-            </div>
-            <button
-              onClick={() => handleDelete(item._id)}
-              className="absolute top-2 right-2 text-red-600 hover:text-red-800 bg-white/70 p-1 rounded-full"
-            >
-              <Trash2 className="w-5 h-5" />
-            </button>
-          </div>
-        ))}
+        {gallery.map(
+          (item) =>
+            item.imageUrl && (
+              <div key={item._id} className="border rounded-xl shadow-md overflow-hidden relative">
+                <img
+                  src={`https://zanu-sunidhi-coliving-4.onrender.com${item.imageUrl}`}
+                  alt={item.alt || item.category}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg">{item.category}</h3>
+                  <p className="text-sm text-gray-600">{item.alt || "No description"}</p>
+                </div>
+                <button
+                  onClick={() => handleDelete(item._id)}
+                  className="absolute top-2 right-2 text-red-600 hover:text-red-800 bg-white/70 p-1 rounded-full"
+                >
+                  <Trash2 className="w-5 h-5" />
+                </button>
+              </div>
+            )
+        )}
       </div>
     </div>
   );

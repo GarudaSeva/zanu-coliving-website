@@ -19,7 +19,7 @@ const AdminLoginModal = ({ onSuccess }: AdminLoginModalProps) => {
     setLoading(true);
 
     try {
-      const res = await axios.post("https://zanu-sunidhi-coliving-4.onrender.co/api/admin/login", {
+      const res = await axios.post("https://zanu-sunidhi-coliving-4.onrender.com/api/admin/login", {
         email,
         password,
       });

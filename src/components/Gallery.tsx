@@ -15,16 +15,18 @@ const Gallery = () => {
 
   // Fetch gallery images from backend
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
-        setImages(res.data.data);
-      } catch (err) {
-        console.error("Error fetching gallery images:", err);
-      }
-    };
-    fetchImages();
-  }, []);
+  const fetchImages = async () => {
+    try {
+      const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
+      setImages(res.data?.data || []);
+    } catch (err) {
+      console.error("Error fetching gallery images:", err);
+      setImages([]); // fallback
+    }
+  };
+  fetchImages();
+}, []);
+
 
   const filteredImages =
     activeCategory === "All"

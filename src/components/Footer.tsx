@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="flex flex-row justify-between mb-8 mx-16">
           {/* Brand */}
           <div>
             <div className="text-2xl font-bold mb-4">
@@ -14,35 +14,11 @@ const Footer = () => {
               <span className="text-accent"> Sunidhi</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Affordable and comfortable co-living spaces in the heart of Gachibowli, Hyderabad.
+              Affordable and comfortable co-living spaces 
             </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="#home" className="hover:text-primary transition-colors">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#rooms" className="hover:text-primary transition-colors">
-                  Rooms
-                </a>
-              </li>
-              <li>
-                <a href="#facilities" className="hover:text-primary transition-colors">
-                  Facilities
-                </a>
-              </li>
-              <li>
-                <a href="#gallery" className="hover:text-primary transition-colors">
-                  Gallery
-                </a>
-              </li>
-            </ul>
+            <p className="text-sm text-muted-foreground">
+              in the heart of Gachibowli, Hyderabad.
+            </p>
           </div>
 
           {/* Contact */}

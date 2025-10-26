@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -13,11 +14,17 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Connect to backend for form submission
-    toast.success("Thank you! We'll contact you soon.");
-    setFormData({ name: "", email: "", phone: "", message: "" });
+
+    try {
+      await axios.post("http://localhost:5000/api/contact", formData);
+      toast.success("Thank you! We'll contact you soon.");
+      setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
+      console.error(error);
+    }
   };
 
   const handleWhatsApp = () => {

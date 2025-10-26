@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const Location = () => {
   const address = "Street No. 2, Near SRH Salon, Gachibowli, Hyderabad - 500032";
-  const mapUrl = "https://maps.google.com/?q=17.4419,78.3487"; // Coordinates from the poster
+  const mapUrl = "https://maps.google.com/?q=17.4443683624268,78.3621139526367"; // Coordinates from the poster
 
   return (
     <section id="location" className="py-20 bg-background">
@@ -74,15 +74,6 @@ const Location = () => {
               >
                 Contact Us
               </Button>
-            </div>
-
-            {/* Additional Info */}
-            <div className="bg-accent/10 rounded-lg p-6">
-              <h4 className="font-semibold mb-2">Why Gachibowli?</h4>
-              <p className="text-sm text-muted-foreground">
-                Gachibowli is Hyderabad's premier IT hub, home to major tech companies and startups. 
-                Our guest inn offers easy access to workplaces, entertainment, and essential services.
-              </p>
             </div>
           </div>
         </div>

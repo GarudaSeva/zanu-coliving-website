@@ -11,21 +11,27 @@ interface GalleryItem {
 const Gallery = () => {
   const [images, setImages] = useState<GalleryItem[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
   const categories = ["All", "Bedroom", "Dining", "Common Area"];
 
   // Fetch gallery images from backend
-  useEffect(() => {
+ useEffect(() => {
   const fetchImages = async () => {
     try {
       const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
-      setImages(res.data?.data || []);
+      setImages(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
-      console.error("Error fetching gallery images:", err);
-      setImages([]); // fallback
+      console.error(err);
+      setImages([]);
+    } finally {
+      setLoading(false);
     }
   };
   fetchImages();
 }, []);
+
+if (loading) return <p className="text-center py-10">Loading gallery...</p>;
+
 
 
   const filteredImages =

@@ -94,11 +94,10 @@ const RoomsCarousel = () => {
               <Card
                 key={room._id}
                 data-carousel-item
-                className={`flex-shrink-0 w-[90%] sm:w-[48%] md:w-[32%] lg:w-[23%] snap-center border border-border/40 bg-white/80 backdrop-blur-md hover:-translate-y-2 transition-all duration-300 hover:shadow-xl ${
-                  room.popular
+                className={`flex-shrink-0 w-[90%] sm:w-[48%] md:w-[32%] lg:w-[23%] snap-center border border-border/40 bg-white/80 backdrop-blur-md hover:-translate-y-2 transition-all duration-300 hover:shadow-xl ${room.popular
                     ? "border-secondary/80 shadow-[0_0_20px_rgba(255,200,0,0.3)]"
                     : ""
-                }`}
+                  }`}
               >
                 {room.popular && (
                   <div className="absolute top-4 right-4 bg-gradient-to-r from-secondary to-amber-400 text-secondary-foreground px-3 py-1 rounded-full text-xs font-semibold animate-pulse">
@@ -132,9 +131,12 @@ const RoomsCarousel = () => {
                   <Button
                     size="sm"
                     className="w-full bg-primary hover:bg-primary/90 text-white"
-                    onClick={() =>
-                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-                    }
+                    onClick={() => {
+                      const message = encodeURIComponent(
+                        `Hi! I'm interested in booking the "${room.type}" room at Zanu Sunidhi Guest Inn.\n\nDetails:\n• Price: ${room.price} ${room.period || "/month"}\n• Capacity: ${room.capacity} person${room.capacity > 1 ? "s" : ""}\n\nPlease share availability and booking details.`
+                      );
+                      window.open(`https://wa.me/918437085252?text=${message}`, "_blank");
+                    }}
                   >
                     Check Availability
                   </Button>

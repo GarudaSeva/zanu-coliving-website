@@ -14,6 +14,11 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
+  const handleWhatsApp = () => {
+  const message = encodeURIComponent("Hi! I'm interested in booking a room at Zanu Sunidhi Guest Inn.");
+  window.open(`https://wa.me/918437085252?text=${message}`, '_blank');
+};
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-4">
@@ -41,7 +46,7 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="default" size="lg" className="bg-secondary hover:bg-secondary/90">
+            <Button variant="default" size="lg" className="bg-secondary hover:bg-secondary/90" onClick={handleWhatsApp} >
               <Phone className="w-4 h-4 mr-2" />
               Book Now
             </Button>

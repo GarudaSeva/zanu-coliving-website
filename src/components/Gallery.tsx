@@ -15,22 +15,22 @@ const Gallery = () => {
   const categories = ["All", "Bedroom", "Dining", "Common Area"];
 
   // Fetch gallery images from backend
- useEffect(() => {
-  const fetchImages = async () => {
-    try {
-      const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
-      setImages(Array.isArray(res.data) ? res.data : []);
-    } catch (err) {
-      console.error(err);
-      setImages([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchImages();
-}, []);
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const res = await axios.get("https://zanu-sunidhi-coliving-4.onrender.com/api/gallery");
+        setImages(Array.isArray(res.data) ? res.data : []);
+      } catch (err) {
+        console.error(err);
+        setImages([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchImages();
+  }, []);
 
-if (loading) return <p className="text-center py-10">Loading gallery...</p>;
+  if (loading) return <p className="text-center py-10">Loading gallery...</p>;
 
 
 
@@ -57,11 +57,10 @@ if (loading) return <p className="text-center py-10">Loading gallery...</p>;
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${
-                activeCategory === category
+              className={`px-6 py-2 rounded-full font-medium transition-all ${activeCategory === category
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
-              }`}
+                }`}
             >
               {category}
             </button>

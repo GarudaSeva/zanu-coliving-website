@@ -18,14 +18,31 @@ const Contact = () => {
     e.preventDefault();
 
     try {
+      // 1️⃣ Store in database
       await axios.post("https://zanu-sunidhi-coliving-4.onrender.com/api/contact", formData);
+
+      // 2️⃣ Send to WhatsApp
+      const message = encodeURIComponent(
+        `Hi! A new contact request from Zanu Sunidhi Guest Inn:\n\n` +
+        `Name: ${formData.name}\n` +
+        `Email: ${formData.email}\n` +
+        `Phone: ${formData.phone}\n` +
+        `Message: ${formData.message}`
+      );
+
+      const whatsappUrl = `https://wa.me/918437085252?text=${message}`;
+      window.open(whatsappUrl, "_blank");
+
+      // 3️⃣ Reset form & show toast
       toast.success("Thank you! We'll contact you soon.");
       setFormData({ name: "", email: "", phone: "", message: "" });
+
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
       console.error(error);
     }
   };
+
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent("Hi! I'm interested in booking a room at Zanu Sunidhi Guest Inn.");

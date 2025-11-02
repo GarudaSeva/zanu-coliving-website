@@ -6,7 +6,7 @@ import GalleryTab from "@/components/admin/GalleryTab";
 import AdminLoginModal from "@/components/AdminLoginModal";
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState<"Add Property" | "Add Rooms" | "View Contacts" | "Add RoomTypes">("Add Property");
+  const [activeTab, setActiveTab] = useState<"Add Property" | "View Contacts" | "Add RoomTypes">("Add Property");
   const [authenticated, setAuthenticated] = useState(false); // ← user must login
 
   if (!authenticated) {
@@ -21,7 +21,7 @@ const AdminDashboard = () => {
 
       {/* Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
-        {["Add Property", "Add Rooms", "View Contacts", "Add RoomTypes"].map((tab) => (
+        {["Add Property", "View Contacts", "Add RoomTypes"].map((tab) => (
           <button
             key={tab}
             className={`px-6 py-2 rounded-lg font-medium transition-transform duration-200
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
       {/* Tab Content */}
       <div>
         {activeTab === "Add Property" && <GalleryTab />}
-        {activeTab === "Add Rooms" && <RoomsTab />}
+        {/* {activeTab === "Add Rooms" && <RoomsTab />} */}
         {activeTab === "View Contacts" && <ContactTab />}
         {activeTab === "Add RoomTypes" && <RoomTypesTab />}
       </div>

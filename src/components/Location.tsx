@@ -6,7 +6,7 @@ const Location = () => {
   const mapUrl = "https://maps.google.com/?q=17.4443683624268,78.3621139526367"; // Coordinates from the poster
 
   return (
-    <section id="location" className="py-20 bg-background">
+    <section id="location" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

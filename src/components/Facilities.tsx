@@ -1,4 +1,4 @@
-import { Bed, Droplet, Wifi, Shield, Coffee, Utensils, Car, Tv, Wind, Refrigerator, Newspaper, Camera } from "lucide-react";
+import { Bed, Droplet, Wifi, Shield, WashingMachine , Utensils, Car, Tv, Wind, Refrigerator, Newspaper, Camera } from "lucide-react";
 
 const Facilities = () => {
   const facilities = [
@@ -6,7 +6,7 @@ const Facilities = () => {
     { icon: Droplet, title: "Attached Washroom", color: "text-secondary" },
     { icon: Shield, title: "Safe Double Door Wooden Cupboards", color: "text-accent" },
     { icon: Droplet, title: "Hot Water", color: "text-primary" },
-    { icon: Coffee, title: "Washing Machine", color: "text-secondary" },
+    { icon: WashingMachine , title: "Washing Machine", color: "text-secondary" },
     { icon: Utensils, title: "House Keeping 24x7 Services", color: "text-accent" },
     { icon: Wifi, title: "High Speed Wi-Fi", color: "text-primary" },
     { icon: Wind, title: "All A/C Rooms", color: "text-secondary" },

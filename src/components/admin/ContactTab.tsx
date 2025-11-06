@@ -18,7 +18,7 @@ const ContactTab = () => {
     const fetchContacts = async () => {
       try {
         const res = await axios.get(
-          "https://zanu-sunidhi-coliving-4.onrender.com/api/contact"
+          `${import.meta.env.VITE_BACKEND_URL}/api/contact`
         );
         setContacts(res.data);
       } catch (err) {

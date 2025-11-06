@@ -42,7 +42,7 @@ const RoomsCarousel = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await fetch("https://zanu-sunidhi-coliving-4.onrender.com/api/rooms");
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/rooms`);
         const data: RoomType[] = await res.json();
         setRooms(data);
       } catch (err) {

@@ -26,7 +26,7 @@ const GalleryTab = () => {
   const fetchGallery = async () => {
   try {
     const res = await axios.get(
-      "https://zanu-sunidhi-coliving-4.onrender.com/api/gallery"
+      `${import.meta.env.VITE_BACKEND_URL}/api/gallery`
     );
     setGallery(Array.isArray(res.data) ? res.data : []);
   } catch (err) {
@@ -63,7 +63,7 @@ const GalleryTab = () => {
 
     try {
       const res = await axios.post(
-        "https://zanu-sunidhi-coliving-4.onrender.com/api/gallery/upload",
+        `${import.meta.env.VITE_BACKEND_URL}/api/gallery/upload`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -82,7 +82,7 @@ const GalleryTab = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      await axios.delete(`https://zanu-sunidhi-coliving-4.onrender.com/api/gallery/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/gallery/${id}`);
       setGallery(gallery.filter((item) => item._id !== id));
     } catch (err) {
       console.error("Delete error:", err);
@@ -166,7 +166,7 @@ const GalleryTab = () => {
             item.imageUrl && (
               <div key={item._id} className="border rounded-xl shadow-md overflow-hidden relative">
                 <img
-                  src={`https://zanu-sunidhi-coliving-4.onrender.com${item.imageUrl}`}
+                  src={`${import.meta.env.VITE_BACKEND_URL}${item.imageUrl}`}
                   alt={item.alt || item.category}
                   className="w-full h-48 object-cover"
                 />

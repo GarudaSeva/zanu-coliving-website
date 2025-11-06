@@ -19,7 +19,7 @@ const Contact = () => {
 
     try {
       // 1️⃣ Store in database
-      await axios.post("https://zanu-sunidhi-coliving-4.onrender.com/api/contact", formData);
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, formData);
 
       // 2️⃣ Send to WhatsApp
       const message = encodeURIComponent(

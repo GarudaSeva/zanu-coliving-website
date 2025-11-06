@@ -64,7 +64,7 @@ const RoomsCarousel = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/40 relative">
+    <section id="rooms" className="py-20 bg-gradient-to-b from-background to-muted/40 relative">
       <div className="container mx-auto px-4">
         {/* Title */}
         <div className="text-center mb-12">

@@ -1,5 +1,15 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+
+// ✅ Import images directly
+import bedroom1 from "@/assets/bedroom1.jpg";
+import bedroom2 from "@/assets/bedroom2.jpg";
+import bedroom3 from "@/assets/bedroom3.jpg";
+import bedroom4 from "@/assets/bedroom4.jpg";
+import bedroom5 from "@/assets/bedroom5.jpg";
+import bedroom6 from "@/assets/bedroom6.jpg";
+import dining1 from "@/assets/dining1.jpg";
+import dining2 from "@/assets/dining2.jpg";
+import dining3 from "@/assets/dining3.jpg";
 
 interface GalleryItem {
   _id: string;
@@ -9,30 +19,65 @@ interface GalleryItem {
 }
 
 const Gallery = () => {
-  const [images, setImages] = useState<GalleryItem[]>([]);
   const [activeCategory, setActiveCategory] = useState("All");
-  const [loading, setLoading] = useState(true);
-  const categories = ["All", "Bedroom", "Dining", "Common Area"];
+  const categories = ["All", "Bedroom", "Dining"];
 
-  // Fetch gallery images from backend
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/gallery`);
-        setImages(Array.isArray(res.data) ? res.data : []);
-      } catch (err) {
-        console.error(err);
-        setImages([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchImages();
-  }, []);
-
-  if (loading) return <p className="text-center py-10">Loading gallery...</p>;
-
-
+  const images: GalleryItem[] = [
+    {
+      _id: "1",
+      category: "Bedroom",
+      alt: "Cozy single bedroom with comfortable bed",
+      imageUrl: bedroom1,
+    },
+    {
+      _id: "2",
+      category: "Bedroom",
+      alt: "Minimal bedroom featuring a neat single bed",
+      imageUrl: bedroom2,
+    },
+    {
+      _id: "3",
+      category: "Bedroom",
+      alt: "Bedroom with bed and table setup for study or dining",
+      imageUrl: bedroom3,
+    },
+    {
+      _id: "4",
+      category: "Bedroom",
+      alt: "Well-ventilated bedroom with large windows for natural light",
+      imageUrl: bedroom4,
+    },
+    {
+      _id: "5",
+      category: "Bedroom",
+      alt: "Air-conditioned bedroom for cool and comfortable living",
+      imageUrl: bedroom5,
+    },
+    {
+      _id: "6",
+      category: "Bedroom",
+      alt: "Spacious bedroom with bed and study table for work or study",
+      imageUrl: bedroom6,
+    },
+    {
+      _id: "7",
+      category: "Dining",
+      alt: "Spacious dining hall with elegant furniture setup",
+      imageUrl: dining1,
+    },
+    {
+      _id: "8",
+      category: "Dining",
+      alt: "Dining area with refrigerator and modern setup",
+      imageUrl: dining2,
+    },
+    {
+      _id: "9",
+      category: "Dining",
+      alt: "Contemporary dining area with cozy ambiance and refrigerator",
+      imageUrl: dining3,
+    },
+  ];
 
   const filteredImages =
     activeCategory === "All"
@@ -42,6 +87,7 @@ const Gallery = () => {
   return (
     <section id="gallery" className="py-16 section-pattern">
       <div className="container mx-auto px-4">
+        {/* Title */}
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <span className="text-primary">Gallery</span>
@@ -57,10 +103,11 @@ const Gallery = () => {
             <button
               key={category}
               onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2 rounded-full font-medium transition-all ${activeCategory === category
+              className={`px-6 py-2 rounded-full font-medium transition-all ${
+                activeCategory === category
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground hover:bg-muted/80"
-                }`}
+              }`}
             >
               {category}
             </button>
@@ -74,15 +121,22 @@ const Gallery = () => {
               key={image._id}
               className="group relative aspect-video rounded-xl overflow-hidden bg-muted hover:shadow-xl transition-all duration-300"
             >
+              {/* Image with dim effect */}
               <img
-                src={`${import.meta.env.VITE_BACKEND_URL}${image.imageUrl}`}
+                src={image.imageUrl}
                 alt={image.alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-all duration-500 group-hover:brightness-75 group-hover:scale-105"
+                loading="lazy"
               />
 
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-primary/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <p className="text-white font-medium">{image.alt}</p>
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+              {/* Text sliding up from bottom (fully hidden initially) */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                <p className="text-white text-sm font-medium text-center drop-shadow-md">
+                  {image.alt}
+                </p>
               </div>
             </div>
           ))}

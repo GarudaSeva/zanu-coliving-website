@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
-import axios from "axios";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,39 +13,31 @@ const Contact = () => {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      // 1️⃣ Store in database
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, formData);
-
-      // 2️⃣ Send to WhatsApp
-      const message = encodeURIComponent(
-        `Hi! A new contact request from Zanu Sunidhi Guest Inn:\n\n` +
+    // ✅ Directly send to WhatsApp
+    const message = encodeURIComponent(
+      `Hi! A new contact request from Zanu Sunidhi Guest Inn:\n\n` +
         `Name: ${formData.name}\n` +
         `Email: ${formData.email}\n` +
         `Phone: ${formData.phone}\n` +
         `Message: ${formData.message}`
-      );
+    );
 
-      const whatsappUrl = `https://wa.me/918437085252?text=${message}`;
-      window.open(whatsappUrl, "_blank");
+    const whatsappUrl = `https://wa.me/918437085252?text=${message}`;
+    window.open(whatsappUrl, "_blank");
 
-      // 3️⃣ Reset form & show toast
-      toast.success("Thank you! We'll contact you soon.");
-      setFormData({ name: "", email: "", phone: "", message: "" });
-
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
-      console.error(error);
-    }
+    // ✅ Reset form & show success toast
+    toast.success("Opening WhatsApp... Please send your message!");
+    setFormData({ name: "", email: "", phone: "", message: "" });
   };
 
-
   const handleWhatsApp = () => {
-    const message = encodeURIComponent("Hi! I'm interested in booking a room at Zanu Sunidhi Guest Inn.");
-    window.open(`https://wa.me/918437085252?text=${message}`, '_blank');
+    const message = encodeURIComponent(
+      "Hi! I'm interested in booking a room at Zanu Sunidhi Guest Inn."
+    );
+    window.open(`https://wa.me/918437085252?text=${message}`, "_blank");
   };
 
   return (
@@ -73,10 +64,16 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Phone</h4>
-                    <a href="tel:8437085252" className="text-muted-foreground hover:text-primary transition-colors block">
+                    <a
+                      href="tel:8437085252"
+                      className="text-muted-foreground hover:text-primary transition-colors block"
+                    >
                       8437085252
                     </a>
-                    <a href="tel:8919581753" className="text-muted-foreground hover:text-primary transition-colors block">
+                    <a
+                      href="tel:8919581753"
+                      className="text-muted-foreground hover:text-primary transition-colors block"
+                    >
                       8919581753
                     </a>
                   </div>
@@ -126,7 +123,9 @@ const Contact = () => {
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div className="flex justify-between">
                   <span>Monday - Sunday</span>
-                  <span className="font-medium text-foreground">24/7 Available</span>
+                  <span className="font-medium text-foreground">
+                    24/7 Available
+                  </span>
                 </div>
               </div>
             </div>
@@ -136,55 +135,55 @@ const Contact = () => {
           <div className="bg-card p-8 rounded-2xl border border-border shadow-lg">
             <h3 className="text-2xl font-bold mb-6">Send us a Message</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Input
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                />
-              </div>
+              <Input
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                required
+              />
 
-              <div>
-                <Input
-                  type="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                />
-              </div>
+              <Input
+                type="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+                required
+              />
 
-              <div>
-                <Input
-                  type="tel"
-                  placeholder="Your Phone"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  required
-                />
-              </div>
+              <Input
+                type="tel"
+                placeholder="Your Phone"
+                value={formData.phone}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
+                required
+              />
 
-              <div>
-                <Textarea
-                  placeholder="Your Message (e.g., Preferred dates, room type, special requests)"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={5}
-                  required
-                />
-              </div>
+              <Textarea
+                placeholder="Your Message (e.g., Preferred dates, room type, special requests)"
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                rows={5}
+                required
+              />
 
               <Button
                 type="submit"
                 size="lg"
                 className="w-full bg-primary hover:bg-primary/90"
               >
-                Send Message
+                Send via WhatsApp
               </Button>
 
               <p className="text-xs text-muted-foreground text-center">
-                We'll get back to you within 24 hours
+                We’ll reply to your WhatsApp message shortly
               </p>
             </form>
           </div>

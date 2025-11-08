@@ -85,7 +85,7 @@ const Gallery = () => {
       : images.filter((img) => img.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-16 section-pattern">
+    <section id="gallery" className="py-28 section-pattern">
       <div className="container mx-auto px-4">
         {/* Title */}
         <div className="text-center mb-12 animate-fade-in">

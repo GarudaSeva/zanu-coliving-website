@@ -17,7 +17,7 @@ const Facilities = () => {
   ];
 
   return (
-    <section id="facilities" className="py-28 bg-background">
+    <section id="facilities" className="py-24 pb-8 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">

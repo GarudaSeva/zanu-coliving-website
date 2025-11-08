@@ -112,7 +112,7 @@ const RoomsCarousel = () => {
   return (
     <section
       id="rooms"
-      className="py-28 bg-gradient-to-b from-background to-muted/40 relative"
+      className="py-28 pb-8 bg-gradient-to-b from-background to-muted/40 relative"
     >
       <div className="container mx-auto px-4">
         {/* Title */}
